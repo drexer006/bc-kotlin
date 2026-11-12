@@ -45,6 +45,12 @@ internal class BaseSigner(sigSpec: SigAlgSpec, signingKey: BaseSigningKey) : Sig
             is SLHDSASigSpec -> {
                 simplify("SLHDSA")
             }
+            is MayoSigSpec -> {
+                simplify("MAYO")
+            }
+            is CompositeSigSpec -> {
+                simplify("COMPOSITE")
+            }
             else ->
                 throw IllegalArgumentException("unknown SigAlgSpec")
         }

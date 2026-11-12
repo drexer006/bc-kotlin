@@ -93,7 +93,17 @@ class MLDSASigType: NoDigSigType
 }
 
 /**
- * DSL for SPHINCS+ signature type.
+ * DSL for COMPOSITE signature type.
+ */
+class CompositeSigType: NoDigSigType
+{
+    override fun getSigAlgSpec(): SigAlgSpec {
+        return CompositeSigSpec()
+    }
+}
+
+/**
+ * DSL for SLHDSA signature type.
  */
 class SLHDSASigType: NoDigSigType
 {
@@ -113,6 +123,16 @@ class LMSSigType: NoDigSigType
 }
 
 /**
+ * DSL for Mayo signature type.
+ */
+class MayoSigType: NoDigSigType
+{
+    override fun getSigAlgSpec(): SigAlgSpec {
+        return MayoSigSpec()
+    }
+}
+
+/**
  * DSL for block whose methods will return a calculator or a pkcs10RequestBuilder
  */
 class SignatureBlock
@@ -128,6 +148,7 @@ class SignatureBlock
     lateinit var signature: SignatureDetails
 
     val PKCS1v1dot5 = SignatureDetails(this, PKCS1SigType())
+    val COMPOSITE = SignatureDetails(this, CompositeSigType())
     val ECDSA = SignatureDetails(this, ECDSASigType())
     val DSA = SignatureDetails(this, DSASigType())
     val EdDSA = SignatureDetails(this, EdDSASigType())
@@ -136,6 +157,7 @@ class SignatureBlock
     val MLDSA = SignatureDetails(this, MLDSASigType())
     val SLHDSA = SignatureDetails(this, SLHDSASigType())
     val LMS = SignatureDetails(this, LMSSigType())
+    val MAYO = SignatureDetails(this, MayoSigType())
 
     val sha224 = Digest.SHA224
     val sha256 = Digest.SHA256
